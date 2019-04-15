@@ -20,7 +20,7 @@
               (tool-bar-lines . 0)
               (width . 166) ; chars
               (height . 56) ; lines
-              (background-color . "thistle")
+              ;;(background-color . "thistle")
               (left . 200)
               (top . 50)))
       (setq default-frame-alist
@@ -28,7 +28,7 @@
               (tool-bar-lines . 0)
               (width . 166)
               (height . 56)
-              (background-color . "thistle")
+              ;;(background-color . "thistle")
               (left . 200)
               (top . 50)
              )
@@ -41,10 +41,22 @@
 )
 
 (custom-set-variables
- '(package-selected-packages (quote (js2-mode)))
-)
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("b47946a3a69d091a75b89819983835ac6f7fb94c9b491da38a4907b1185bebe0" default)))
+ )
+
+
 (custom-set-faces
-)
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -62,3 +74,5 @@
   (setq-default tab-width 4)
 )
 
+;; set theme
+(load-theme 'bliss)
