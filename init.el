@@ -30,21 +30,20 @@
               (height . 56)
               (background-color . "thistle")
               (left . 200)
-              (top . 50))))
+              (top . 50)
+             )
+      )
+   )
   (progn
     (setq initial-frame-alist '( (tool-bar-lines . 0)))
-    (setq default-frame-alist '( (tool-bar-lines . 0)))))
+    (setq default-frame-alist '( (tool-bar-lines . 0)))
+  )
+)
+
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (js2-mode))))
+ '(package-selected-packages (quote (js2-mode)))
+)
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
 )
 
 (require 'js2-mode)
