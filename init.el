@@ -5,6 +5,7 @@
    'package-archives
    ;; '("melpa" . "http://stable.melpa.org/packages/") ; many packages won't show if using stable
    '("melpa" . "http://melpa.milkbox.net/packages/") t)
+   ;; (package-refresh-contents)
 )
 
 (package-initialize)
@@ -20,7 +21,7 @@
               (tool-bar-lines . 0)
               (width . 166) ; chars
               (height . 56) ; lines
-              ;;(background-color . "thistle")
+              ;; (background-color . "thistle")
               (left . 200)
               (top . 50)))
       (setq default-frame-alist
@@ -28,7 +29,7 @@
               (tool-bar-lines . 0)
               (width . 166)
               (height . 56)
-              ;;(background-color . "thistle")
+              ;; (background-color . "thistle")
               (left . 200)
               (top . 50)
              )
@@ -59,6 +60,9 @@
 ;; save/restore opened files and window config on start
 (desktop-save-mode 1) ;; 0 to turn off
 
+;; set theme
+(load-theme 'bliss)
+
 ;; set tab to always use spaces
 ;; set tab width to four spaces
 (progn
@@ -66,5 +70,6 @@
   (setq-default tab-width 4)
 )
 
-;; set theme
-(load-theme 'bliss)
+;; show cursor position
+(column-number-mode 1)
+
