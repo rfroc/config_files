@@ -42,13 +42,21 @@
 )
 
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
     ("b47946a3a69d091a75b89819983835ac6f7fb94c9b491da38a4907b1185bebe0" default)))
- )
+ '(package-selected-packages (quote (js2-mode bliss-theme))))
 
 
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 
 (require 'js2-mode)
@@ -73,3 +81,5 @@
 ;; show cursor position
 (column-number-mode 1)
 
+;; map just-one-space
+(global-set-key (kbd "C-c x") 'just-one-space);
