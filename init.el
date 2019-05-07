@@ -10,6 +10,23 @@
 
 (package-initialize)
 
+(add-to-list 'load-path "~/.emacs.d/lisp")
+;; include web-mode
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+;; enable autocomplete
+(setq web-mode-ac-sources-alist
+  '(("css" . (ac-source-css-property))
+    ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
+
+
 ;; turn off splash screen
 (setq inhibit-splash-screen t)
 
@@ -49,7 +66,7 @@
  '(custom-safe-themes
    (quote
     ("b47946a3a69d091a75b89819983835ac6f7fb94c9b491da38a4907b1185bebe0" default)))
- '(package-selected-packages (quote (js2-mode bliss-theme))))
+ '(package-selected-packages (quote (auto-complete web-mode js2-mode bliss-theme))))
 
 
 (custom-set-faces
