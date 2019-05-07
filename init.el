@@ -1,14 +1,11 @@
 ;; load emacs 24's package system. Add MELPA repository.
 (when (>= emacs-major-version 24)
   (require 'package)
-  (add-to-list
-   'package-archives
-   ;; '("melpa" . "http://stable.melpa.org/packages/") ; many packages won't show if using stable
-   '("melpa" . "http://melpa.milkbox.net/packages/") t)
-   ;; (package-refresh-contents)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 )
 
-(package-initialize)
+
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 ;; include web-mode
@@ -66,7 +63,9 @@
  '(custom-safe-themes
    (quote
     ("b47946a3a69d091a75b89819983835ac6f7fb94c9b491da38a4907b1185bebe0" default)))
- '(package-selected-packages (quote (auto-complete web-mode js2-mode bliss-theme))))
+ '(package-selected-packages
+   (quote
+    (yasnippet auto-complete web-mode js2-mode bliss-theme))))
 
 
 (custom-set-faces
