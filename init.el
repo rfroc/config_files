@@ -7,7 +7,7 @@
 
 
 
-(add-to-list 'load-path "~/.emacs.d/lisp")
+;; (add-to-list 'load-path "~/.emacs.d/lisp")
 
 
 
@@ -93,6 +93,7 @@
 
 ;; set theme
 (load-theme 'bliss)
+;; (enable-theme 'bliss)
 
 ;; set tab to always use spaces
 ;; set tab width to four spaces
