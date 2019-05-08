@@ -8,7 +8,11 @@
 
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
-;; include web-mode
+
+
+
+(require 'emmet-mode)
+
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -18,6 +22,9 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+
+
 ;; enable autocomplete
 (setq web-mode-ac-sources-alist
   '(("css" . (ac-source-css-property))
@@ -99,3 +106,8 @@
 
 ;; map just-one-space
 (global-set-key (kbd "C-c x") 'just-one-space);
+
+;; emmet mode
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+(setq emmet-move-cursor-between-quotes t) ;; default nil
