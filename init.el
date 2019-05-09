@@ -13,6 +13,12 @@
 (column-number-mode 1)
 ;; save/restore opened files and window config on start
 (desktop-save-mode 1) ;; 0 to turn off
+;; set tab to always use spaces
+;; set tab width to four spaces
+(progn
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 4)
+)
 
 ;; set initial emacs position and size on screen
 (if (display-graphic-p)
@@ -54,29 +60,18 @@
    (quote
     (use-package yasnippet auto-complete web-mode js2-mode bliss-theme))))
 
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
-
-
-
-
-
+)
 
 ;; set theme
 (load-theme 'bliss)
 ;; (enable-theme 'bliss)
 
-;; set tab to always use spaces
-;; set tab width to four spaces
-(progn
-  (setq-default indent-tabs-mode nil)
-  (setq-default tab-width 4)
-)
+
 
 ;; enable autocomplete
 (setq web-mode-ac-sources-alist
@@ -84,19 +79,21 @@
     ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
 
 
+
 ;; map just-one-space
 (global-set-key (kbd "C-c x") 'just-one-space);
 
 
-;; (require 'js2-mode)
-;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+
 (use-package js2-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 ;; Better imenu
-(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 
-
+(use-package js2-imenu-extras-mode
+  :hook js2-mode)
+  
 (use-package web-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
