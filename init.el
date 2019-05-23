@@ -58,14 +58,14 @@
     ("b47946a3a69d091a75b89819983835ac6f7fb94c9b491da38a4907b1185bebe0" default)))
  '(package-selected-packages
    (quote
-    (use-package yasnippet auto-complete web-mode js2-mode bliss-theme))))
+    (company-c-headers company-shell company-tern company use-package yasnippet auto-complete web-mode js2-mode bliss-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-)
+ )
 
 ;; set theme
 (load-theme 'bliss)
@@ -108,3 +108,9 @@
 (use-package emmet-mode
   :hook (sgml-mode css-mode web-mode)
   :custom (emmet-move-cursor-between-quotes t))
+
+(use-package org
+  :bind (("C-c l" . 'org-store-link)
+         ("C-c a" . 'org-agenda))
+  :custom (org-log-done t)
+  )
