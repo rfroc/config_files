@@ -61,7 +61,7 @@
     ("b47946a3a69d091a75b89819983835ac6f7fb94c9b491da38a4907b1185bebe0" default)))
  '(package-selected-packages
    (quote
-    (helm-projectile emmet-mode helm company-c-headers company-shell company-tern company use-package yasnippet auto-complete web-mode js2-mode bliss-theme))))
+    (helm-descbinds helm-projectile emmet-mode helm company-c-headers company-shell company-tern company use-package yasnippet auto-complete web-mode js2-mode bliss-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -137,6 +137,7 @@
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-c h g") 'helm-google-suggest)
+(global-set-key (kbd "C-x r b") 'helm-bookmarks)
 
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
@@ -177,6 +178,8 @@
 
 (helm-mode 1)
 
+(require 'helm-descbinds)
+(helm-descbinds-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; end temporary helm mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
