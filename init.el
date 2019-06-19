@@ -24,8 +24,8 @@
       (setq initial-frame-alist
             '(
               (tool-bar-lines . 0)
-              (width . 166) ; chars
-              (height . 56) ; lines
+              (width . 256) ; chars
+              (height . 64) ; lines
               ;; (background-color . "thistle")
               (left . 200)
               (top . 50)))
