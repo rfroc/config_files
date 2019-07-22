@@ -58,10 +58,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("b47946a3a69d091a75b89819983835ac6f7fb94c9b491da38a4907b1185bebe0" default)))
+    ("274fa62b00d732d093fc3f120aca1b31a6bb484492f31081c1814a858e25c72e" "84da7b37214b4ac095a55518502dfa82633bee74f64daf6e1785322e77516f96" "fd944f09d4d0c4d4a3c82bd7b3360f17e3ada8adf29f28199d09308ba01cc092" "b47946a3a69d091a75b89819983835ac6f7fb94c9b491da38a4907b1185bebe0" default)))
  '(package-selected-packages
    (quote
-    (helm-descbinds helm-projectile emmet-mode helm company-c-headers company-shell company-tern company use-package yasnippet auto-complete web-mode js2-mode bliss-theme))))
+    (web-mode hydra tide company-anaconda xref-js2 ag indium ztree dracula-theme doom-themes centaur-tabs lorem-ipsum helm-descbinds helm-projectile emmet-mode helm company-c-headers company-shell company-tern company use-package yasnippet auto-complete js2-mode bliss-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -71,7 +71,8 @@
  )
 
 ;; set theme
-(load-theme 'bliss)
+;;(load-theme 'bliss)
+(load-theme 'dracula)
 ;; (enable-theme 'bliss)
 
 
@@ -83,17 +84,21 @@
 
 
 
-;; map just-one-space
+;; map global keys
 (global-set-key (kbd "C-c x") 'just-one-space);
+(global-set-key [f2] 'eshell);
 
-
+;; enable company mode globally
+(use-package company
+  :defer t
+  :init (global-company-mode))
 
 
 (use-package js2-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
-;; Better imenu
 
+;; ;; Better imenu
 (use-package js2-imenu-extras-mode
   :hook js2-mode)
   
@@ -111,6 +116,33 @@
 (use-package emmet-mode
   :hook (sgml-mode css-mode web-mode)
   :custom (emmet-move-cursor-between-quotes t))
+
+
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode)
+  (flycheck-add-next-checker 'javascript-jshint 'javascript-eslint 'append))
+
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode 1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode 1)
+  (tide-hl-identifier-mode 1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  (company-mode 1))
+
+;; (flycheck-add-next-checker 'javascript-jshint 'javascript-eslint 'append)
+(add-hook 'js2-mode-hook #'setup-tide-mode)
+
+
+(require 'indium)
+(add-hook 'js-mode-hook #'indium-interaction-mode)
+
+
 
 (use-package org
   :bind (("C-c l" . 'org-store-link)
@@ -184,3 +216,18 @@
 ;; end temporary helm mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; lorem-ipsum
+(global-set-key (kbd "C-c C-k s") 'lorem-ipsum-insert-sentences)
+(global-set-key (kbd "C-c C-k p") 'lorem-ipsum-insert-paragraphs)
+(global-set-key (kbd "C-c C-k l") 'lorem-ipsum-insert-list)
+
+
+
+;; centaur tabs
+(use-package centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
