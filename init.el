@@ -55,7 +55,6 @@
 (display-time-mode 1)
 
 
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -75,20 +74,18 @@
  )
 
 
-
 ;; map just-one-space
 (global-set-key (kbd "C-c x") 'just-one-space);
 (global-set-key [f2] 'eshell);
-
 
 (use-package js2-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
-;; Better imenu
+;; ;; Better imenu
 (use-package js2-imenu-extras-mode
   :hook js2-mode)
-
+  
 
 (use-package web-mode
   :init
@@ -101,7 +98,6 @@
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 
-
 (use-package emmet-mode
   :hook (sgml-mode css-mode web-mode)
   :custom (emmet-move-cursor-between-quotes t))
@@ -110,7 +106,6 @@
   :bind (("C-c l" . 'org-store-link)
          ("C-c a" . 'org-agenda))
   :custom (org-log-done t))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; helm mode temporary
@@ -216,6 +211,9 @@
   :config
   (yas-global-mode 1))
 
-
-
 ;; TODO: enable tidy-HTML in flycheck
+
+;; lorem-ipsum
+(global-set-key (kbd "C-c C-k s") 'lorem-ipsum-insert-sentences)
+(global-set-key (kbd "C-c C-k p") 'lorem-ipsum-insert-paragraphs)
+(global-set-key (kbd "C-c C-k l") 'lorem-ipsum-insert-list)
