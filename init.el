@@ -65,7 +65,7 @@
     ("04589c18c2087cd6f12c01807eed0bdaa63983787025c209b89c779c61c3a4c4" default)))
  '(package-selected-packages
    (quote
-    (yasnippet-snippets yasnippet yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
+    (htmlize lorem-ipsum yasnippet-snippets yasnippet yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -77,6 +77,10 @@
 ;; map just-one-space
 (global-set-key (kbd "C-c x") 'just-one-space);
 (global-set-key [f2] 'eshell);
+;; lorem-ipsum
+(global-set-key (kbd "C-c C-k s") 'lorem-ipsum-insert-sentences)
+(global-set-key (kbd "C-c C-k p") 'lorem-ipsum-insert-paragraphs)
+(global-set-key (kbd "C-c C-k l") 'lorem-ipsum-insert-list)
 
 (use-package js2-mode
   :init
@@ -211,9 +215,9 @@
   :config
   (yas-global-mode 1))
 
+(add-to-list 'load-path "~/.emacs.d/es6-snippets")
+(use-package es6-snippets)
+
 ;; TODO: enable tidy-HTML in flycheck
 
-;; lorem-ipsum
-(global-set-key (kbd "C-c C-k s") 'lorem-ipsum-insert-sentences)
-(global-set-key (kbd "C-c C-k p") 'lorem-ipsum-insert-paragraphs)
-(global-set-key (kbd "C-c C-k l") 'lorem-ipsum-insert-list)
+(put 'set-goal-column 'disabled nil)
