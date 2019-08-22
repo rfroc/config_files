@@ -65,7 +65,7 @@
     ("04589c18c2087cd6f12c01807eed0bdaa63983787025c209b89c779c61c3a4c4" default)))
  '(package-selected-packages
    (quote
-    (htmlize lorem-ipsum yasnippet-snippets yasnippet yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
+    (prettier-js indium htmlize lorem-ipsum yasnippet-snippets yasnippet yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -220,4 +220,9 @@
 
 ;; TODO: enable tidy-HTML in flycheck
 
+;; enable set-goal-column
 (put 'set-goal-column 'disabled nil)
+
+;; prettier
+(require 'prettier-js)
+(add-hook 'js2-mode-hook 'prettier-js-mode)
