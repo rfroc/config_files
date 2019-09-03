@@ -74,9 +74,11 @@
  )
 
 
-;; map just-one-space
+;; map global keyboard shortcuts
 (global-set-key (kbd "C-c x") 'just-one-space);
 (global-set-key [f2] 'eshell);
+(global-set-key [f12] 'browse-url-of-file);
+
 ;; lorem-ipsum
 (global-set-key (kbd "C-c C-k s") 'lorem-ipsum-insert-sentences)
 (global-set-key (kbd "C-c C-k p") 'lorem-ipsum-insert-paragraphs)
@@ -224,5 +226,13 @@
 (put 'set-goal-column 'disabled nil)
 
 ;; prettier
-(require 'prettier-js)
-(add-hook 'js2-mode-hook 'prettier-js-mode)
+(use-package prettier-js
+  :after js2-mode
+  :init
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+  ;;(add-hook 'web-mode-hook 'prettier-js-mode)
+  :config
+  (setq prettier-js-args '("--bracket-spacing" "true"
+                           "--tab-width" "4")))
+
+
