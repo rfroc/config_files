@@ -54,6 +54,8 @@
 ;; show clock
 (display-time-mode 1)
 
+;; font is Hack
+(add-to-list 'default-frame-alist '(font . "Hack Nerd Font Mono 10"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -65,7 +67,7 @@
     ("04589c18c2087cd6f12c01807eed0bdaa63983787025c209b89c779c61c3a4c4" default)))
  '(package-selected-packages
    (quote
-    (prettier-js indium htmlize lorem-ipsum yasnippet-snippets yasnippet yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
+    (magithub magit prettier-js indium htmlize lorem-ipsum yasnippet-snippets yasnippet yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -78,6 +80,10 @@
 (global-set-key (kbd "C-c x") 'just-one-space);
 (global-set-key [f2] 'eshell);
 (global-set-key [f12] 'browse-url-of-file);
+(global-set-key (kbd "C-x <up>") 'windmove-up)
+(global-set-key (kbd "C-x <down>") 'windmove-down)
+(global-set-key (kbd "C-x <right>") 'windmove-right)
+(global-set-key (kbd "C-x <left>") 'windmove-left)
 
 ;; lorem-ipsum
 (global-set-key (kbd "C-c C-k s") 'lorem-ipsum-insert-sentences)
@@ -263,5 +269,4 @@
   :config
   (setq prettier-js-args '("--bracket-spacing" "true"
                            "--tab-width" "4")))
-
 
