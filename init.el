@@ -54,7 +54,10 @@
 ;; show clock
 (display-time-mode 1)
 
+(set-language-environment "UTF-8")
+;; (set-default-coding-systems 'utf-8-unix)
 ;; font is Hack
+;; (add-to-list 'default-frame-alist '(font . "Hack Nerd Font Mono 10"))
 (add-to-list 'default-frame-alist '(font . "Hack Nerd Font Mono 10"))
 
 (custom-set-variables
