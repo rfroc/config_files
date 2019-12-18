@@ -56,9 +56,10 @@
 
 (set-language-environment "UTF-8")
 ;; (set-default-coding-systems 'utf-8-unix)
+
 ;; font is Hack
-;; (add-to-list 'default-frame-alist '(font . "Hack Nerd Font Mono 10"))
 (add-to-list 'default-frame-alist '(font . "Hack Nerd Font Mono 10"))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -70,7 +71,7 @@
     ("04589c18c2087cd6f12c01807eed0bdaa63983787025c209b89c779c61c3a4c4" default)))
  '(package-selected-packages
    (quote
-    (magithub magit prettier-js indium htmlize lorem-ipsum yasnippet-snippets yasnippet yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
+    (exec-path-from-shell json-mode expand-region crux rjsx-mode xref-js2 js2-refactor magithub magit prettier-js indium htmlize lorem-ipsum yasnippet-snippets yasnippet yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -125,11 +126,23 @@
 (use-package js2-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+;;  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode)))
 
 ;; ;; Better imenu
 (use-package js2-imenu-extras-mode
   :hook js2-mode)
-  
+
+;; js2-refactor and xref-js2
+(require 'js2-refactor)
+(require 'xref-js2)
+
+(add-hook 'js2-mode-hook #'js2-refactor-mode)
+(js2r-add-keybindings-with-prefix "C-c C-r")
+(define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+(define-key js-mode-map (kbd "M-.") nil)
+(add-hook 'js2-mode-hook (lambda ()
+  (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+
 
 (use-package web-mode
   :init
@@ -140,10 +153,14 @@
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))) ;; auto-enable for .js/.jsx files
+  ;; (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+
+;; jsx syntax highlighting
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 
 (use-package emmet-mode
-  :hook (sgml-mode css-mode web-mode)
+  :hook (sgml-mode css-mode web-mode js2-mode)
   :custom (emmet-move-cursor-between-quotes t))
 
 (use-package org
@@ -216,17 +233,26 @@
 ;; end temporary helm mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package rjsx-mode
+   :ensure t
+   :mode (
+         ("\\.jsx\\'" . rjsx-mode)))
 
 (use-package company
   :defer t
   :init (global-company-mode))
 
-
 (use-package flycheck
   :ensure t
   :init
   (global-flycheck-mode)
-  (flycheck-add-next-checker 'javascript-jshint 'javascript-eslint 'append))
+  (flycheck-add-next-checker 'javascript-eslint  'javascript-jshint 'append))
+
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint json-jsonlist)))
 
 
 (defun setup-tide-mode ()
@@ -236,8 +262,6 @@
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode 1)
   (tide-hl-identifier-mode 1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
   (company-mode 1))
 
 (use-package tide
@@ -268,8 +292,24 @@
   :after js2-mode
   :init
   (add-hook 'js2-mode-hook 'prettier-js-mode)
-  ;;(add-hook 'web-mode-hook 'prettier-js-mode)
+  (add-hook 'web-mode-hook 'prettier-js-mode)
   :config
   (setq prettier-js-args '("--bracket-spacing" "true"
                            "--tab-width" "4")))
 
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+(use-package crux
+  :ensure t
+  :bind (("C-a" . crux-move-beginning-of-line)))
+
+
+(use-package expand-region
+  :ensure t)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+(delete-selection-mode t)
+
+
+;; TODO js2-minor-mode for js/jsx files
