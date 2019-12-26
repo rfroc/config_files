@@ -71,7 +71,7 @@
     ("04589c18c2087cd6f12c01807eed0bdaa63983787025c209b89c779c61c3a4c4" default)))
  '(package-selected-packages
    (quote
-    (exec-path-from-shell json-mode expand-region crux rjsx-mode xref-js2 js2-refactor magithub magit prettier-js indium htmlize lorem-ipsum yasnippet-snippets yasnippet yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
+    (exec-path-from-shell json-mode expand-region crux xref-js2 js2-refactor magithub magit prettier-js indium htmlize lorem-ipsum yasnippet-snippets yasnippet yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -153,8 +153,11 @@
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))) ;; auto-enable for .js/.jsx files
+  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode)))  ;; auto-enable for .js/.jsx files
+  
   ;; (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+(add-to-list 'web-mode-comment-formats '("jsx" . "//" ))
+(add-to-list 'web-mode-comment-formats '("javascript" . "//" ))
 
 ;; jsx syntax highlighting
 (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
@@ -233,27 +236,31 @@
 ;; end temporary helm mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package rjsx-mode
-   :ensure t
-   :mode (
-         ("\\.jsx\\'" . rjsx-mode)))
+;; (use-package rjsx-mode
+;;    :ensure t
+;;    :mode (
+;;          ("\\.jsx\\'" . rjsx-mode)))
 
 (use-package company
   :defer t
-  :init (global-company-mode))
+  :init (global-company-mode)
+  :config
+  (setq company-idle-delay              0.1
+        company-minimum-prefix-length   2
+        company-show-numbers            t
+        company-dabbrev-downcase        nil))
 
 (use-package flycheck
   :ensure t
   :init
   (global-flycheck-mode)
-  (flycheck-add-next-checker 'javascript-eslint  'javascript-jshint 'append))
-
-(flycheck-add-mode 'javascript-eslint 'web-mode)
-
+  (flycheck-add-next-checker 'javascript-eslint  'javascript-jshint 'append)
+  ;;(setq flycheck-eslintrc "~/.eslintrc.json")
+  (flycheck-add-mode 'javascript-eslint 'web-mode))
+  
 (setq-default flycheck-disabled-checkers
               (append flycheck-disabled-checkers
                       '(javascript-jshint json-jsonlist)))
-
 
 (defun setup-tide-mode ()
   (interactive)
@@ -271,7 +278,8 @@
          (typescript-mode . tide-hl-identifier-mode)
          (before-save . tide-format-before-save)))
 
-(add-hook 'js2-mode-hook #'setup-tide-mode)
+;;(add-hook 'js2-mode-hook #'setup-tide-mode)
+(add-hook 'web-mode-hook #'setup-tide-mode)
 
 
 (use-package yasnippet
@@ -285,7 +293,7 @@
 ;; TODO: enable tidy-HTML in flycheck
 
 ;; enable set-goal-column
-(put 'set-goal-column 'disabled nil)
+;;(put 'set-goal-column 'disabled nil)
 
 ;; prettier
 (use-package prettier-js
@@ -297,8 +305,8 @@
   (setq prettier-js-args '("--bracket-spacing" "true"
                            "--tab-width" "4")))
 
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
+;; (put 'downcase-region 'disabled nil)
+;; (put 'upcase-region 'disabled nil)
 
 (use-package crux
   :ensure t
@@ -309,6 +317,8 @@
   :ensure t)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
+;; causes selected text to be deleted or replaced by subsequent
+;; key presses, as in (all) other editors
 (delete-selection-mode t)
 
 
