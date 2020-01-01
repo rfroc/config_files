@@ -71,7 +71,7 @@
     ("04589c18c2087cd6f12c01807eed0bdaa63983787025c209b89c779c61c3a4c4" default)))
  '(package-selected-packages
    (quote
-    (exec-path-from-shell json-mode expand-region crux xref-js2 js2-refactor magithub magit prettier-js indium htmlize lorem-ipsum yasnippet-snippets yasnippet yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
+    (js-react-redux-yasnippets exec-path-from-shell json-mode expand-region crux xref-js2 js2-refactor magithub magit prettier-js indium htmlize lorem-ipsum yasnippet-snippets yasnippet yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
