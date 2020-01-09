@@ -10,6 +10,11 @@
 
 (require 'use-package)
 
+;; turn off scroll bars, toolbars, and menus
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+
 ;; turn off splash screen
 (setq inhibit-splash-screen t)
 ;; save/restore opened files and window config on start
@@ -21,17 +26,18 @@
   (setq-default tab-width 4)
 )
 
+
 ;; set initial emacs position and size on screen
 (if (display-graphic-p)
     (progn
       (setq initial-frame-alist
             '(
               (tool-bar-lines . 0)
-              (width . 256) ; chars
-              (height . 64) ; lines
+              (width . 317) ; chars
+              (height . 81) ; lines
               ;; (background-color . "thistle")
-              (left . 200)
-              (top . 50)))
+              (left . 2)
+              (top . 16)))
       (setq default-frame-alist
             '(
               (tool-bar-lines . 0)
@@ -71,7 +77,7 @@
     ("04589c18c2087cd6f12c01807eed0bdaa63983787025c209b89c779c61c3a4c4" default)))
  '(package-selected-packages
    (quote
-    (js-react-redux-yasnippets exec-path-from-shell json-mode expand-region crux xref-js2 js2-refactor magithub magit prettier-js indium htmlize lorem-ipsum yasnippet-snippets yasnippet yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
+    (js-react-redux-yasnippets react-snippets yasnippet-snippets exec-path-from-shell json-mode expand-region crux xref-js2 js2-refactor magithub magit prettier-js indium htmlize lorem-ipsum yasnippet-classic-snippets tide flycheck company helm-descbinds helm-projectile helm emmet-mode web-mode js2-mode cherry-blossom-theme use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -245,7 +251,7 @@
   :defer t
   :init (global-company-mode)
   :config
-  (setq company-idle-delay              0.1
+  (setq company-idle-delay              0.5
         company-minimum-prefix-length   2
         company-show-numbers            t
         company-dabbrev-downcase        nil))
@@ -301,6 +307,7 @@
   :init
   (add-hook 'js2-mode-hook 'prettier-js-mode)
   (add-hook 'web-mode-hook 'prettier-js-mode)
+  (add-hook 'json-mode-hook 'prettier-js-mode)
   :config
   (setq prettier-js-args '("--bracket-spacing" "true"
                            "--tab-width" "4")))
