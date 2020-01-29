@@ -26,7 +26,6 @@
   (setq-default tab-width 4)
 )
 
-
 ;; set initial emacs position and size on screen
 (if (display-graphic-p)
     (progn
@@ -62,6 +61,13 @@
 
 (set-language-environment "UTF-8")
 ;; (set-default-coding-systems 'utf-8-unix)
+
+;; show paren matching
+(show-paren-mode 1)
+(setq show-paren-style 'parenthesis)
+(require 'paren)
+(set-face-background 'show-paren-match "#00AA00")
+(set-face-attribute 'show-paren-match nil :weight 'extra-bold)
 
 ;; font is Hack
 (add-to-list 'default-frame-alist '(font . "Hack Nerd Font Mono 10"))
@@ -159,9 +165,10 @@
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode)))  ;; auto-enable for .js/.jsx files
-  
-  ;; (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode)))
+
 (add-to-list 'web-mode-comment-formats '("jsx" . "//" ))
 (add-to-list 'web-mode-comment-formats '("javascript" . "//" ))
 
@@ -308,6 +315,7 @@
   (add-hook 'js2-mode-hook 'prettier-js-mode)
   (add-hook 'web-mode-hook 'prettier-js-mode)
   (add-hook 'json-mode-hook 'prettier-js-mode)
+  (add-hook 'css-mode-hook 'prettier-js-mode)
   :config
   (setq prettier-js-args '("--bracket-spacing" "true"
                            "--tab-width" "4")))
